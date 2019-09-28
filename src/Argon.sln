@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Argon.Webapp", "Argon.Webapp\Argon.Webapp.csproj", "{1F63F357-02AC-430F-97A1-89887B22847B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Argon.UI", "Argon.UI\Argon.UI.csproj", "{AD589FE1-F13C-49BF-BFCE-67C3D4181C47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F63F357-02AC-430F-97A1-89887B22847B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F63F357-02AC-430F-97A1-89887B22847B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F63F357-02AC-430F-97A1-89887B22847B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F63F357-02AC-430F-97A1-89887B22847B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD589FE1-F13C-49BF-BFCE-67C3D4181C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD589FE1-F13C-49BF-BFCE-67C3D4181C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD589FE1-F13C-49BF-BFCE-67C3D4181C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD589FE1-F13C-49BF-BFCE-67C3D4181C47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7F8D8EB-52CE-446C-B6E0-E734767D3803}
+	EndGlobalSection
+EndGlobal
