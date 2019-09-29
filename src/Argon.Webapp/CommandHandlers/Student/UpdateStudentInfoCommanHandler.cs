@@ -12,6 +12,7 @@ namespace Argon.Webapp.CommandHandlers.Student
         {
             _studentRepository = studentRepository;
         }
+
         public CommandResult Handle(UpdateStudentInfoCommand command)
         {
             if (_studentRepository.GetStudent(command.StudentId) == null)

@@ -51,7 +51,7 @@ namespace Argon.Webapp
             });
 
             RegisterRepositories(services);
-            RegisterHandlers(services);
+            services.AddDecorators();
             services.AddSingleton<Messages>();
             RegisterMapper();
         }
@@ -77,20 +77,6 @@ namespace Argon.Webapp
         private void RegisterRepositories(IServiceCollection services)
         {
             services.AddTransient<StudentRepository>();
-
-        }
-
-        private void RegisterHandlers(IServiceCollection services)
-        {
-            // Commands
-            services.AddTransient<ICommandHandler<RegisterStudentCommand>, RegisterStudentCommandHandler>();
-            services.AddTransient<ICommandHandler<UnregisterStudentCommand>, UnregisterStudentCommandHandler>();
-            services.AddTransient<ICommandHandler<UpdateStudentInfoCommand>, UpdateStudentInfoCommanHandler>();
-            
-
-            //Queries
-            services.AddTransient<IQueryHandler<GetStudentByIdQuery, StudentResponseDto>, GetStudentByIdQueryHandler>();
-            services.AddTransient<IQueryHandler<GetStudentListQuery, ICollection<StudentResponseDto>>, GetStudentListQueryHandler>();
         }
 
         private void RegisterMapper()
@@ -100,11 +86,11 @@ namespace Argon.Webapp
                 cfg.CreateMap<Student, StudentResponseDto>();
             });
         }
+
         private string GetXmlCommentsPath()
         {
             var app = System.AppContext.BaseDirectory;
             return System.IO.Path.Combine(app, "Argon.Webapp.xml");
         }
-
     }
 }

@@ -8,6 +8,5 @@
         public Student Student { get; set; }
         public int StudentId { get; set; }
         public Grade Grade { get; set; }
-
     }
 }

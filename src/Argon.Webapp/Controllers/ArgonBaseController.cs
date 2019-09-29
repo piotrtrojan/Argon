@@ -21,7 +21,6 @@ namespace Argon.Webapp.Controllers
             if (typeof(T) is ICollection)
                 return HandleQueryCollectionResult(result);
             return HandleQueryElementResult(result);
-            
         }
 
         private IActionResult HandleQueryCollectionResult<T>(T result)
@@ -35,6 +34,5 @@ namespace Argon.Webapp.Controllers
                 return NotFound();
             return Ok(result);
         }
-
     }
 }

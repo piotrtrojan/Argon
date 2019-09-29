@@ -8,7 +8,7 @@ namespace Argon.Webapp.Utils
         public bool IsFailure { get; }
         public bool IsSuccess { get; }
         public string Error { get; }
-        
+
         private CommandResult(bool isFailure, string error)
         {
             IsFailure = isFailure;

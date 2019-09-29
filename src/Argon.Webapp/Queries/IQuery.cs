@@ -1,6 +1,6 @@
 ﻿namespace Argon.Webapp.Queries
 {
-    public interface IQuery<TResult> 
+    public interface IQuery<TResult>
     {
     }
 }

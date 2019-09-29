@@ -14,6 +14,5 @@ namespace Argon.Webapp.Contexts
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Argon-2;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
-
     }
 }

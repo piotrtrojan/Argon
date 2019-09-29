@@ -8,6 +8,5 @@ namespace Argon.Webapp.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
-
     }
 }

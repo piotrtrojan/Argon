@@ -9,6 +9,7 @@ namespace Argon.Webapp.Utils
     public class Messages
     {
         private readonly IServiceProvider _provider;
+
         public Messages(IServiceProvider serviceProvider)
         {
             _provider = serviceProvider;

@@ -22,7 +22,6 @@ namespace Argon.Webapp.Controllers
         {
             var students = _messages.Dispatch(new GetStudentListQuery());
             return HandleQueryResult(students);
-
         }
 
         [HttpGet("{id:int}")]
@@ -48,7 +47,6 @@ namespace Argon.Webapp.Controllers
             var command = new UpdateStudentInfoCommand(id, dto.Name, dto.Surname);
             var result = _messages.Dispatch(command);
             return HandleCommandResult(result);
-
         }
 
         [HttpDelete("{id:int}")]

@@ -9,6 +9,5 @@ namespace Argon.Webapp.Models
         public Teacher Teacher { get; set; }
         public int TeacherId { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
-
     }
 }
