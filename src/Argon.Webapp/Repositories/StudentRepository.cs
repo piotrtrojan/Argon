@@ -29,15 +29,20 @@ namespace Argon.Webapp.Repositories
             }
         }
 
-        public ICollection<Student> GetStudents(int? enrollmentId)
+        public void RegisterStudent(Student student)
+        {
+            using (var ctx = new ArgonDbContext())
+            {
+                ctx.Students.Add(student);
+                ctx.SaveChanges();
+            }
+        }
+
+        public ICollection<Student> GetStudents()
         {
             using (var ctx = new ArgonDbContext())
             {
                 var queryable = ctx.Students.AsQueryable();
-                if (enrollmentId.HasValue)
-                {
-                    queryable = queryable.Where(q => q.Enrollments.Contains(new Enrollment { Id = enrollmentId.Value }));
-                }
                 return queryable.ToList();
             }
         }

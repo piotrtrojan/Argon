@@ -3,27 +3,27 @@ using System.Runtime.Serialization;
 
 namespace Argon.Webapp.Utils
 {
-    public struct Result : ISerializable
+    public struct CommandResult : ISerializable
     {
         public bool IsFailure { get; }
         public bool IsSuccess { get; }
         public string Error { get; }
         
-        private Result(bool isFailure, string error)
+        private CommandResult(bool isFailure, string error)
         {
             IsFailure = isFailure;
             IsSuccess = !isFailure;
             Error = error;
         }
 
-        public static Result Fail(string error)
+        public static CommandResult Fail(string error)
         {
-            return new Result(true, error);
+            return new CommandResult(true, error);
         }
 
-        public static Result Ok()
+        public static CommandResult Ok()
         {
-            return new Result(false, string.Empty);
+            return new CommandResult(false, string.Empty);
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)

@@ -1,4 +1,5 @@
 ﻿using Argon.Webapp.Commands.Student;
+using Argon.Webapp.Repositories;
 using Argon.Webapp.Utils;
 using System;
 
@@ -6,9 +7,22 @@ namespace Argon.Webapp.CommandHandlers.Student
 {
     public class RegisterStudentCommandHandler : ICommandHandler<RegisterStudentCommand>
     {
-        public Result Handle(RegisterStudentCommand command)
+        private readonly StudentRepository _studentRepository;
+
+        public RegisterStudentCommandHandler(StudentRepository studentRepository)
         {
-            throw new NotImplementedException();
+            _studentRepository = studentRepository;
+        }
+        public CommandResult Handle(RegisterStudentCommand command)
+        {
+            var student = new Models.Student
+            {
+                Name = command.Name,
+                Surname = command.Surname
+            };
+            _studentRepository.RegisterStudent(student);
+            return CommandResult.Ok();
+
         }
     }
 }

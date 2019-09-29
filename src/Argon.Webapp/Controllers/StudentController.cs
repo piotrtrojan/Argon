@@ -1,8 +1,10 @@
-﻿using Argon.Webapp.Commands.Student;
+﻿using System;
+using System.Collections.Generic;
+using Argon.Webapp.Commands.Student;
 using Argon.Webapp.Dtos.Student;
+using Argon.Webapp.Queries.Student;
 using Argon.Webapp.Utils;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace Argon.Webapp.Controllers
 {
@@ -16,16 +18,24 @@ namespace Argon.Webapp.Controllers
         {
             _messages = messages;
         }
+
         [HttpGet]
         public IActionResult GetList()
         {
-            throw new NotImplementedException();
+            var students = _messages.Dispatch(new GetStudentListQuery());
+            return HandleQueryResult(students);
+            return Ok(students);
+
         }
 
         [HttpGet]
-        public IActionResult GetStudent()
+        [Route("{id:int}")]
+        public IActionResult GetStudent(int id)
         {
-            throw new NotImplementedException();
+            var student = _messages.Dispatch(new GetStudentByIdQuery(id));
+            if (student is null)
+                return NotFound();
+            return Ok(student);
         }
 
         [HttpPost]
@@ -33,7 +43,7 @@ namespace Argon.Webapp.Controllers
         {
             var command = new RegisterStudentCommand(dto.Name, dto.Surname);
             var result = _messages.Dispatch(command);
-            return result.IsSuccess ? Ok() : Error(result.Error);
+            return HandleCommandResult(result);
         }
 
         [HttpPut]
@@ -42,14 +52,15 @@ namespace Argon.Webapp.Controllers
         {
             var command = new UpdateStudentInfoCommand(studentId, dto.Surname, dto.Name);
             var result = _messages.Dispatch(command);
-            return result.IsSuccess ? Ok() : Error(result.Error);
+            return HandleCommandResult(result);
 
         }
 
         [HttpDelete]
-        public IActionResult UnregisterStudent()
+        [Route("{id:int}")]
+        public IActionResult UnregisterStudent(int id)
         {
-            throw new NotImplementedException();
+            return Ok();
         }
     }
 }

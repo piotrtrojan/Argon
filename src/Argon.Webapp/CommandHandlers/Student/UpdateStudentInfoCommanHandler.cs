@@ -12,17 +12,17 @@ namespace Argon.Webapp.CommandHandlers.Student
         {
             _studentRepository = studentRepository;
         }
-        public Result Handle(UpdateStudentInfoCommand command)
+        public CommandResult Handle(UpdateStudentInfoCommand command)
         {
             if (_studentRepository.GetStudent(command.StudentId) == null)
-                return Result.Fail($"Student {command.StudentId} does not exist.");
+                return CommandResult.Fail($"Student {command.StudentId} does not exist.");
             var student = new Models.Student()
             {
                 Name = command.Name,
                 Surname = command.Surname
             };
             _studentRepository.Update(command.StudentId, student);
-            return Result.Ok();
+            return CommandResult.Ok();
         }
     }
 }

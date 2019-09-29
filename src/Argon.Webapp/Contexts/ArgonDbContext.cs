@@ -10,6 +10,10 @@ namespace Argon.Webapp.Contexts
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Argon-2;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
 
     }
 }

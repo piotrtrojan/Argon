@@ -5,6 +5,6 @@ namespace Argon.Webapp.CommandHandlers
 {
     public interface ICommandHandler<TCommand> where TCommand : ICommand
     {
-        Result Handle(TCommand command);
+        CommandResult Handle(TCommand command);
     }
 }
