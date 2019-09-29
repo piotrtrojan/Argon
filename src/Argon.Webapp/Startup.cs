@@ -84,7 +84,9 @@ namespace Argon.Webapp
         {
             // Commands
             services.AddTransient<ICommandHandler<RegisterStudentCommand>, RegisterStudentCommandHandler>();
+            services.AddTransient<ICommandHandler<UnregisterStudentCommand>, UnregisterStudentCommandHandler>();
             services.AddTransient<ICommandHandler<UpdateStudentInfoCommand>, UpdateStudentInfoCommanHandler>();
+            
 
             //Queries
             services.AddTransient<IQueryHandler<GetStudentByIdQuery, StudentResponseDto>, GetStudentByIdQueryHandler>();

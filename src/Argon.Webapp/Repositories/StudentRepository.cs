@@ -23,7 +23,8 @@ namespace Argon.Webapp.Repositories
                 var entity = ctx.Students.FirstOrDefault(q => q.Id == id);
                 if (entity == null)
                     throw new ArgumentException($"Student {id} does not exist.");
-                entity = student;
+                entity.Name = student.Name;
+                entity.Surname = student.Surname;
                 ctx.Students.Update(entity);
                 ctx.SaveChanges();
             }

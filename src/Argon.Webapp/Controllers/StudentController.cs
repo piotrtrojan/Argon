@@ -43,9 +43,9 @@ namespace Argon.Webapp.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public IActionResult UpdateStudentPersonalInfo(int studentId, UpdateStudentInfoDto dto)
+        public IActionResult UpdateStudentPersonalInfo(int id, UpdateStudentInfoDto dto)
         {
-            var command = new UpdateStudentInfoCommand(studentId, dto.Surname, dto.Name);
+            var command = new UpdateStudentInfoCommand(id, dto.Name, dto.Surname);
             var result = _messages.Dispatch(command);
             return HandleCommandResult(result);
 
