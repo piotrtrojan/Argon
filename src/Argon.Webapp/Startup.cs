@@ -1,12 +1,6 @@
-﻿using Argon.Webapp.CommandHandlers;
-using Argon.Webapp.CommandHandlers.Student;
-using Argon.Webapp.Commands.Student;
-using Argon.Webapp.Contexts;
+﻿using Argon.Webapp.Contexts;
 using Argon.Webapp.Dtos.Student;
 using Argon.Webapp.Models;
-using Argon.Webapp.Queries.Student;
-using Argon.Webapp.QueryHandlers;
-using Argon.Webapp.QueryHandlers.Student;
 using Argon.Webapp.Repositories;
 using Argon.Webapp.Utils;
 using AutoMapper;
@@ -16,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
-using System.Collections.Generic;
 
 namespace Argon.Webapp
 {
@@ -32,9 +25,7 @@ namespace Argon.Webapp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkSqlServer()
-               .AddDbContext<ArgonDbContext>();
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(c =>
             {
@@ -49,7 +40,9 @@ namespace Argon.Webapp
                 c.IncludeXmlComments(GetXmlCommentsPath());
                 c.DescribeAllEnumsAsStrings();
             });
-
+            services.AddSingleton(new ConnectionStringWrapper("Server=(localdb)\\mssqllocaldb;Database=Argon-2;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddEntityFrameworkSqlServer()
+               .AddDbContext<ArgonDbContext>();
             RegisterRepositories(services);
             services.AddDecorators();
             services.AddSingleton<Messages>();
@@ -81,10 +74,6 @@ namespace Argon.Webapp
 
         private void RegisterMapper()
         {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Student, StudentResponseDto>();
-            });
         }
 
         private string GetXmlCommentsPath()

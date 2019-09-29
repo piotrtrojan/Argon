@@ -1,10 +1,18 @@
 ﻿using Argon.Webapp.Models;
+using Argon.Webapp.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace Argon.Webapp.Contexts
 {
     public class ArgonDbContext : DbContext
     {
+        private readonly string _connectionString;
+
+        public ArgonDbContext(ConnectionStringWrapper connectionStringWrapper)
+        {
+            _connectionString = connectionStringWrapper.Value;
+        }
+
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -12,7 +20,7 @@ namespace Argon.Webapp.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Argon-2;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }

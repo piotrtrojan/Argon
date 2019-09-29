@@ -1,5 +1,6 @@
 ﻿using Argon.Webapp.Contexts;
 using Argon.Webapp.Models;
+using Argon.Webapp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,15 @@ namespace Argon.Webapp.Repositories
 {
     public class StudentRepository
     {
+        private readonly ConnectionStringWrapper _connectionStringWrapper;
+
+        public StudentRepository(ConnectionStringWrapper connectionStringWrapper)
+        {
+            _connectionStringWrapper = connectionStringWrapper;
+        }
         public Student GetStudent(int id)
         {
-            using (var ctx = new ArgonDbContext())
+            using (var ctx = new ArgonDbContext(_connectionStringWrapper))
             {
                 return ctx.Students.FirstOrDefault(q => q.Id == id);
             }
@@ -18,7 +25,7 @@ namespace Argon.Webapp.Repositories
 
         public void Update(int id, Student student)
         {
-            using (var ctx = new ArgonDbContext())
+            using (var ctx = new ArgonDbContext(_connectionStringWrapper))
             {
                 var entity = ctx.Students.FirstOrDefault(q => q.Id == id);
                 if (entity == null)
@@ -32,7 +39,7 @@ namespace Argon.Webapp.Repositories
 
         public void UnregisterStudent(int id)
         {
-            using (var ctx = new ArgonDbContext())
+            using (var ctx = new ArgonDbContext(_connectionStringWrapper))
             {
                 var student = GetStudent(id);
                 if (student == null)
@@ -44,7 +51,7 @@ namespace Argon.Webapp.Repositories
 
         public void RegisterStudent(Student student)
         {
-            using (var ctx = new ArgonDbContext())
+            using (var ctx = new ArgonDbContext(_connectionStringWrapper))
             {
                 ctx.Students.Add(student);
                 ctx.SaveChanges();
@@ -53,7 +60,7 @@ namespace Argon.Webapp.Repositories
 
         public ICollection<Student> GetStudents()
         {
-            using (var ctx = new ArgonDbContext())
+            using (var ctx = new ArgonDbContext(_connectionStringWrapper))
             {
                 var queryable = ctx.Students.AsQueryable();
                 return queryable.ToList();

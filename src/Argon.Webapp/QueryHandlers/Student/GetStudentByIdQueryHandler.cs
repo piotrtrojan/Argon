@@ -1,23 +1,38 @@
 ﻿using Argon.Webapp.Dtos.Student;
 using Argon.Webapp.Queries.Student;
-using Argon.Webapp.Repositories;
+using Argon.Webapp.Utils;
 using AutoMapper;
+using Dapper;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace Argon.Webapp.QueryHandlers.Student
 {
-    public class GetStudentByIdQueryHandler : IQueryHandler<GetStudentByIdQuery, StudentResponseDto>
+    public class GetStudentByIdQueryHandler : IQueryHandler<GetStudentByIdQuery, GetStudentByIdResponseDto>
     {
-        private readonly StudentRepository _studentRepository;
+        private readonly string _connectionString;
 
-        public GetStudentByIdQueryHandler(StudentRepository studentRepository)
+        public GetStudentByIdQueryHandler(ConnectionStringWrapper connectionStringWrapper)
         {
-            _studentRepository = studentRepository;
+            _connectionString = connectionStringWrapper.Value;
         }
 
-        public StudentResponseDto Handle(GetStudentByIdQuery query)
+        public GetStudentByIdResponseDto Handle(GetStudentByIdQuery query)
         {
-            var student = _studentRepository.GetStudent(query.StudentId);
-            return Mapper.Map<StudentResponseDto>(student);
+
+            string sql = @"
+                SELECT TOP 1 Id, Name, Surname
+                FROM Students s
+                WHERE s.Id = @StudentId
+            ";
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
+            {
+                var students = sqlConnection.Query<GetStudentByIdResponseDto>(sql, new
+                    {
+                        query.StudentId
+                    }).FirstOrDefault();
+                return students;
+            }
         }
     }
 }

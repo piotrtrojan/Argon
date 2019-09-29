@@ -2,7 +2,7 @@
 
 namespace Argon.Webapp.Queries.Student
 {
-    public class GetStudentByIdQuery : IQuery<StudentResponseDto>
+    public class GetStudentByIdQuery : IQuery<GetStudentByIdResponseDto>
     {
         public int StudentId { get; }
 

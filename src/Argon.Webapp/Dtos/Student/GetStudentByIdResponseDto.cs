@@ -1,6 +1,6 @@
 ﻿namespace Argon.Webapp.Dtos.Student
 {
-    public class StudentResponseDto
+    public class GetStudentByIdResponseDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
