@@ -29,6 +29,18 @@ namespace Argon.Webapp.Repositories
             }
         }
 
+        public void UnregisterStudent(int id)
+        {
+            using (var ctx = new ArgonDbContext())
+            {
+                var student = GetStudent(id);
+                if (student == null)
+                    throw new ArgumentException($"Student {id} does not exist.");
+                ctx.Students.Remove(student);
+                ctx.SaveChanges();
+            }
+        }
+
         public void RegisterStudent(Student student)
         {
             using (var ctx = new ArgonDbContext())

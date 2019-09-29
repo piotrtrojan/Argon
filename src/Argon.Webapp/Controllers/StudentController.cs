@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Argon.Webapp.Commands.Student;
+﻿using Argon.Webapp.Commands.Student;
 using Argon.Webapp.Dtos.Student;
 using Argon.Webapp.Queries.Student;
 using Argon.Webapp.Utils;
@@ -24,12 +22,10 @@ namespace Argon.Webapp.Controllers
         {
             var students = _messages.Dispatch(new GetStudentListQuery());
             return HandleQueryResult(students);
-            return Ok(students);
 
         }
 
-        [HttpGet]
-        [Route("{id:int}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetStudent(int id)
         {
             var student = _messages.Dispatch(new GetStudentByIdQuery(id));
@@ -46,8 +42,7 @@ namespace Argon.Webapp.Controllers
             return HandleCommandResult(result);
         }
 
-        [HttpPut]
-        [Route("{id:int}")]
+        [HttpPut("{id:int}")]
         public IActionResult UpdateStudentPersonalInfo(int studentId, UpdateStudentInfoDto dto)
         {
             var command = new UpdateStudentInfoCommand(studentId, dto.Surname, dto.Name);
@@ -56,11 +51,12 @@ namespace Argon.Webapp.Controllers
 
         }
 
-        [HttpDelete]
-        [Route("{id:int}")]
+        [HttpDelete("{id:int}")]
         public IActionResult UnregisterStudent(int id)
         {
-            return Ok();
+            var command = new UnregisterStudentCommand(id);
+            var result = _messages.Dispatch(command);
+            return HandleCommandResult(result);
         }
     }
 }
