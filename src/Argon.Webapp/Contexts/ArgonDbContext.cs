@@ -8,7 +8,7 @@ namespace Argon.Webapp.Contexts
     {
         private readonly string _connectionString;
 
-        public ArgonDbContext(ConnectionStringWrapper connectionStringWrapper)
+        public ArgonDbContext(CommandConnectionStringWrapper connectionStringWrapper)
         {
             _connectionString = connectionStringWrapper.Value;
         }

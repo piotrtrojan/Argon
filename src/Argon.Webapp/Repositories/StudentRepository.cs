@@ -9,9 +9,9 @@ namespace Argon.Webapp.Repositories
 {
     public class StudentRepository
     {
-        private readonly ConnectionStringWrapper _connectionStringWrapper;
+        private readonly CommandConnectionStringWrapper _connectionStringWrapper;
 
-        public StudentRepository(ConnectionStringWrapper connectionStringWrapper)
+        public StudentRepository(CommandConnectionStringWrapper connectionStringWrapper)
         {
             _connectionStringWrapper = connectionStringWrapper;
         }

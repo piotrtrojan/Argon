@@ -1,9 +1,6 @@
 ﻿using Argon.Webapp.Contexts;
-using Argon.Webapp.Dtos.Student;
-using Argon.Webapp.Models;
 using Argon.Webapp.Repositories;
 using Argon.Webapp.Utils;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +37,10 @@ namespace Argon.Webapp
                 c.IncludeXmlComments(GetXmlCommentsPath());
                 c.DescribeAllEnumsAsStrings();
             });
-            services.AddSingleton(new ConnectionStringWrapper("Server=(localdb)\\mssqllocaldb;Database=Argon-2;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            var queryConnectionString = Configuration["QueryConnectionString"];
+            var commandConnectionString = Configuration["CommandConnectionString"];
+            services.AddSingleton(new QueryConnectionStringWrapper(queryConnectionString));
+            services.AddSingleton(new CommandConnectionStringWrapper(commandConnectionString));
             services.AddEntityFrameworkSqlServer()
                .AddDbContext<ArgonDbContext>();
             RegisterRepositories(services);

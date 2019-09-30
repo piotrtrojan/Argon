@@ -1,8 +1,6 @@
 ﻿using Argon.Webapp.Dtos.Student;
 using Argon.Webapp.Queries.Student;
-using Argon.Webapp.Repositories;
 using Argon.Webapp.Utils;
-using AutoMapper;
 using Dapper;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -14,7 +12,7 @@ namespace Argon.Webapp.QueryHandlers.Student
     {
         private readonly string _connectionString;
 
-        public GetStudentListQueryHandler(ConnectionStringWrapper connectionStringWrapper)
+        public GetStudentListQueryHandler(QueryConnectionStringWrapper connectionStringWrapper)
         {
             _connectionString = connectionStringWrapper.Value;
         }
